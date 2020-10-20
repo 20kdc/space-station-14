@@ -1,7 +1,5 @@
 light_mode unshaded;
 
-const highp float PI = 3.14159265;
-
 uniform highp float progress;
 
 void fragment() {
