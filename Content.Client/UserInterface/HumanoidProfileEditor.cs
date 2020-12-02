@@ -40,7 +40,7 @@ namespace Content.Client.UserInterface
         private readonly Button _saveButton;
         private readonly Button _sexFemaleButton;
         private readonly Button _sexMaleButton;
-        private readonly Button _sexClassifiedButton;
+        private readonly Button _sexNeitherButton;
         private readonly HairStylePicker _hairPicker;
         private readonly FacialHairStylePicker _facialHairPicker;
         private readonly List<JobPrioritySelector> _jobPriorities;
@@ -153,7 +153,16 @@ namespace Content.Client.UserInterface
                 {
                     var panel = HighlightedContainer();
                     var hBox = new HBoxContainer();
-                    var sexLabel = new Label { Text = Loc.GetString("Sex:") };
+
+                    /*
+                     * To the two dragons, the gradient, the angel.
+                     * Before judging me, confirm that this iteration of the handling of gender in the game remains untampered.
+                     * This is the fallback compromise.
+                     * My justification - and I *understand* this is the wrong way to do things -
+                     * is that this is what will actually get into the game.
+                     * Please replace this with something better.
+                     */
+                    var sexLabel = new Label { Text = Loc.GetString("Gender:") };
 
                     var sexButtonGroup = new ButtonGroup();
 
@@ -171,18 +180,17 @@ namespace Content.Client.UserInterface
                     };
                     _sexFemaleButton.OnPressed += args => { SetSex(Sex.Female); };
 
-                    _sexClassifiedButton = new Button
+                    _sexNeitherButton = new Button
                     {
-                        /* DUR WHAT IF I PUT ATTACK HELICOPTER HERE DUR HUR AHUHRUHWUIDHAEILUBFOWEL(*&RFH#W*(OBFD&*/
-                        Text = Loc.GetString("Classified"),
+                        Text = Loc.GetString("Neither"),
                         Group = sexButtonGroup
                     };
-                    _sexClassifiedButton.OnPressed += args => { SetSex(Sex.Classified); };
+                    _sexNeitherButton.OnPressed += args => { SetSex(Sex.Neither); };
 
                     hBox.AddChild(sexLabel);
                     hBox.AddChild(_sexMaleButton);
                     hBox.AddChild(_sexFemaleButton);
-                    hBox.AddChild(_sexClassifiedButton);
+                    hBox.AddChild(_sexNeitherButton);
                     panel.AddChild(hBox);
                     sexAndAgeRow.AddChild(panel);
                 }
@@ -581,10 +589,9 @@ namespace Content.Client.UserInterface
 
         private void UpdateSexControls()
         {
-            if (Profile.Sex == Sex.Male)
-                _sexMaleButton.Pressed = true;
-            else
-                _sexFemaleButton.Pressed = true;
+            _sexMaleButton.Pressed = Profile.Sex == Sex.Male;
+            _sexFemaleButton.Pressed = Profile.Sex == Sex.Female;
+            _sexNeitherButton.Pressed = Profile.Sex == Sex.Neither;
         }
 
         private void UpdateHairPickers()

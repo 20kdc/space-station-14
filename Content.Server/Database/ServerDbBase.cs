@@ -130,10 +130,15 @@ namespace Content.Server.Database
         {
             var jobs = profile.Jobs.ToDictionary(j => j.JobName, j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => a.AntagName);
+
+            var sex = Sex.Male;
+            if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
+                sex = sexVal;
+
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.Age,
-                profile.Sex == "Male" ? Sex.Male : Sex.Female,
+                sex,
                 new HumanoidCharacterAppearance
                 (
                     profile.HairName,
