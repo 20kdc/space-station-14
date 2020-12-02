@@ -26,6 +26,9 @@ namespace Content.Server.Database.Entity.Models
         [Column("sex")]
         public string Sex { get; set; } = null!;
 
+        [Column("gender")]
+        public string Gender { get; set; } = null!;
+
         [Column("hair_name")]
         public string HairName { get; set; } = null!;
         [Column("hair_color")]
@@ -40,6 +43,9 @@ namespace Content.Server.Database.Entity.Models
         public string EyeColor { get; set; } = null!;
         [Column("skin_color")]
         public string SkinColor { get; set; } = null!;
+
+        [Column("clothing")]
+        public string Clothing { get; set; } = null!;
 
         public ICollection<Job> Jobs { get; set; } = null!;
         public ICollection<Antag> Antags { get; set; } = null!;

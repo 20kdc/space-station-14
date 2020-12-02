@@ -313,6 +313,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("char_name");
 
+                    b.Property<string>("Clothing")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("clothing");
+
                     b.Property<string>("EyeColor")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -327,6 +332,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("facial_hair_name");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("gender");
 
                     b.Property<string>("HairColor")
                         .IsRequired()
