@@ -187,6 +187,7 @@ namespace Content.Client
             "Hoe",
             "Seed",
             "BotanySharp",
+            "PowerMonitoringConsole",
             "PlantSampleTaker",
             "Internals",
             "GasTank",

@@ -1,0 +1,4 @@
+<SS14Window
+    xmlns="https://spacestation14.io">
+    <Button Name="RequestButton" Text="Wow, this sure isn't localized!" TextAlign="Center" SizeFlagsHorizontal="ShrinkEnd" />
+</SS14Window>

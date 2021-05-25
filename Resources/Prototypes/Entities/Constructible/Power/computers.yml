@@ -124,6 +124,13 @@
     - type: ComputerVisualizer
       key: power_key
       screen: power_monitor
+  - type: PowerMonitoringConsole
+  - type: UserInterface
+    interfaces:
+    - key: enum.PowerMonitoringConsoleUiKey.Key
+      type: PowerMonitoringConsoleBoundUserInterface
+  - type: Computer
+    board: PowerMonitoringComputerCircuitboard
 
 - type: entity
   parent: ComputerBase
