@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.GameObjects.Components.Construction;
 using Content.Server.GameObjects.Components.Power.ApcNetComponents;
 using Content.Server.Utility;
@@ -27,6 +28,7 @@ namespace Content.Server.GameObjects.Components
 
         [ViewVariables] protected BoundUserInterface? UserInterface => Owner.GetUIOrNull(UserInterfaceKey);
         [ViewVariables] public bool Powered => !Owner.TryGetComponent(out PowerReceiverComponent? receiver) || receiver.Powered;
+        [ViewVariables] public bool AnyoneWatchingMe => (UserInterface?.SubscribedSessions?.Count() ?? 0) != 0;
 
         public BaseComputerUserInterfaceComponent(object key)
         {
@@ -108,6 +110,15 @@ namespace Content.Server.GameObjects.Components
         {
         }
 
+        /// <summary>
+        /// Override this if you want the computer to do something when the first person starts looking at it.
+        /// This can be used to maintain the illusion of it always updating.
+        /// Calling base is unnecessary.
+        /// </summary>
+        public virtual void ComputerJustBeforeFirstObserve()
+        {
+        }
+
         void IActivate.Activate(ActivateEventArgs eventArgs)
         {
             if (!eventArgs.User.TryGetComponent(out ActorComponent? actor))
@@ -119,6 +130,9 @@ namespace Content.Server.GameObjects.Components
             {
                 return;
             }
+
+            if (!AnyoneWatchingMe)
+                ComputerJustBeforeFirstObserve();
 
             UserInterface?.Open(actor.PlayerSession);
         }

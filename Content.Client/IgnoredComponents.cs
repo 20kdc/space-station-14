@@ -188,6 +188,7 @@ namespace Content.Client
             "Seed",
             "BotanySharp",
             "PowerMonitoringConsole",
+            "PowerMonitoringConsoleConnector",
             "PlantSampleTaker",
             "Internals",
             "GasTank",

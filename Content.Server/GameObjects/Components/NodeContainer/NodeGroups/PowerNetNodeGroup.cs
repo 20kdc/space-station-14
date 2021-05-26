@@ -10,6 +10,9 @@ namespace Content.Server.GameObjects.Components.NodeContainer.NodeGroups
 {
     public interface IPowerNet
     {
+        IReadOnlyList<PowerSupplierComponent> Suppliers { get; }
+        IReadOnlyDictionary<Priority, IReadOnlyList<PowerConsumerComponent>> ConsumersByPriority { get; }
+
         void AddSupplier(PowerSupplierComponent supplier);
 
         void RemoveSupplier(PowerSupplierComponent supplier);
@@ -34,14 +37,20 @@ namespace Content.Server.GameObjects.Components.NodeContainer.NodeGroups
 
         [Dependency] private readonly IPowerNetManager _powerNetManager = default!;
 
-        [ViewVariables]
         private readonly List<PowerSupplierComponent> _suppliers = new();
+
+        [ViewVariables]
+        public IReadOnlyList<PowerSupplierComponent> Suppliers => _suppliers;
+
+        public IReadOnlyDictionary<Priority, IReadOnlyList<PowerConsumerComponent>> ConsumersByPriority => _consumersByPriorityRO;
 
         [ViewVariables]
         private int _totalSupply = 0;
 
         [ViewVariables]
         private readonly Dictionary<Priority, List<PowerConsumerComponent>> _consumersByPriority = new();
+
+        private readonly Dictionary<Priority, IReadOnlyList<PowerConsumerComponent>> _consumersByPriorityRO = new();
 
         [ViewVariables]
         private readonly Dictionary<Priority, int> _drawByPriority = new();
@@ -50,9 +59,11 @@ namespace Content.Server.GameObjects.Components.NodeContainer.NodeGroups
 
         public PowerNetNodeGroup()
         {
-            foreach (Priority priority in Enum.GetValues(typeof(Priority)))
+            foreach (Priority priority in CachedPriorities)
             {
-                _consumersByPriority.Add(priority, new List<PowerConsumerComponent>());
+                var list = new List<PowerConsumerComponent>();
+                _consumersByPriority.Add(priority, list);
+                _consumersByPriorityRO.Add(priority, list);
                 _drawByPriority.Add(priority, 0);
             }
         }
@@ -151,6 +162,12 @@ namespace Content.Server.GameObjects.Components.NodeContainer.NodeGroups
 
         private class NullPowerNet : IPowerNet
         {
+            private readonly List<PowerSupplierComponent> _suppliers = new();
+            public IReadOnlyList<PowerSupplierComponent> Suppliers => _suppliers;
+
+            private readonly Dictionary<Priority, IReadOnlyList<PowerConsumerComponent>> _consumers = new();
+            public IReadOnlyDictionary<Priority, IReadOnlyList<PowerConsumerComponent>> ConsumersByPriority => _consumers;
+
             public void AddConsumer(PowerConsumerComponent consumer) { }
             public void AddSupplier(PowerSupplierComponent supplier) { }
             public void UpdateSupplierSupply(PowerSupplierComponent supplier, int oldSupplyRate, int newSupplyRate) { }

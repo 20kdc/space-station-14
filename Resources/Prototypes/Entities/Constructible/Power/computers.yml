@@ -125,12 +125,31 @@
       key: power_key
       screen: power_monitor
   - type: PowerMonitoringConsole
+  - type: PowerMonitoringConsoleConnector
+    voltage: High
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      hv:
+        !type:AdjacentNode
+        nodeGroupID: HVPower
+      mv:
+        !type:AdjacentNode
+        nodeGroupID: MVPower
+      apc:
+        !type:AdjacentNode
+        nodeGroupID: Apc
   - type: UserInterface
     interfaces:
     - key: enum.PowerMonitoringConsoleUiKey.Key
       type: PowerMonitoringConsoleBoundUserInterface
   - type: Computer
     board: PowerMonitoringComputerCircuitboard
+  - type: ClientEntitySpawner
+    prototypes:
+    - HVDummyWire
+    - MVDummyWire
+    - LVDummyWire
 
 - type: entity
   parent: ComputerBase
