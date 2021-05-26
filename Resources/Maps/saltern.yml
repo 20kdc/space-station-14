@@ -34057,6 +34057,8 @@ entities:
 - uid: 3379
   type: SalternSubstation
   components:
+  - name: library substation
+    type: MetaData
   - pos: 14.5,-25.5
     parent: 853
     type: Transform
@@ -36290,6 +36292,8 @@ entities:
 - uid: 3613
   type: SalternSubstation
   components:
+  - name: engineering substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: 42.5,-0.5
     parent: 853
@@ -36303,6 +36307,8 @@ entities:
 - uid: 3614
   type: SalternSubstation
   components:
+  - name: cargo substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: 27.5,13.5
     parent: 853
@@ -36316,6 +36322,8 @@ entities:
 - uid: 3615
   type: SalternSubstation
   components:
+  - name: bridge substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: 11.5,24.5
     parent: 853
@@ -36329,6 +36337,8 @@ entities:
 - uid: 3616
   type: SalternSubstation
   components:
+  - name: medical substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: 21.5,-9.5
     parent: 853
@@ -36349,6 +36359,8 @@ entities:
 - uid: 3618
   type: SalternSubstation
   components:
+  - name: research substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: -0.5,-22.5
     parent: 853
@@ -36371,6 +36383,8 @@ entities:
 - uid: 3620
   type: SalternSubstation
   components:
+  - name: bar substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: 0.5,-6.5
     parent: 853
@@ -36384,6 +36398,8 @@ entities:
 - uid: 3621
   type: SalternSubstation
   components:
+  - name: dorms substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: -21.5,-10.5
     parent: 853
@@ -36397,6 +36413,8 @@ entities:
 - uid: 3622
   type: SalternSubstation
   components:
+  - name: arrivals substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: -32.5,7.5
     parent: 853
@@ -44265,6 +44283,8 @@ entities:
 - uid: 4481
   type: SalternSubstation
   components:
+  - name: left singularity shield emitter substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: 45.5,-10.5
     parent: 853
@@ -44278,6 +44298,8 @@ entities:
 - uid: 4482
   type: SalternSubstation
   components:
+  - name: right singularity shield emitter substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: 53.5,-10.5
     parent: 853
@@ -46266,6 +46288,8 @@ entities:
 - uid: 4716
   type: SalternSubstation
   components:
+  - name: security substation
+    type: MetaData
   - rot: 4.371139006309477E-08 rad
     pos: -15.5,16.5
     parent: 853
