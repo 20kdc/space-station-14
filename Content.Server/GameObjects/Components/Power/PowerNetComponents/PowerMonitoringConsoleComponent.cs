@@ -1,4 +1,5 @@
 #nullable enable
+using System.Collections.Generic;
 using Content.Server.GameObjects.Components.Power.ApcNetComponents;
 using Content.Server.GameObjects.EntitySystems;
 using Content.Server.Utility;
@@ -27,7 +28,12 @@ namespace Content.Server.GameObjects.Components.Power.PowerNetComponents
 
         public void UpdateUIState()
         {
-            UserInterface?.SetState(new PowerMonitoringConsoleBoundInterfaceState());
+            var totalSources = 121.0;
+            var totalLoads = 212.0;
+            var sources = new List<PowerMonitoringConsoleEntry>();
+            var loads = new List<PowerMonitoringConsoleEntry>();
+            sources.Add(new PowerMonitoringConsoleEntry("IPI", "SalternSubstation", 1234));
+            UserInterface?.SetState(new PowerMonitoringConsoleBoundInterfaceState(totalSources, totalLoads, sources.ToArray(), loads.ToArray()));
         }
     }
 }

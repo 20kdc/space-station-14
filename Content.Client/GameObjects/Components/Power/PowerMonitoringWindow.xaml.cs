@@ -13,17 +13,43 @@ using Robust.Shared.IoC;
 using Robust.Shared.Localization;
 using Robust.Shared.Maths;
 using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.GameObjects.Components.Power
 {
     [GenerateTypedNameReferences]
     public partial class PowerMonitoringWindow : SS14Window, IComputerWindow<PowerMonitoringConsoleBoundInterfaceState>
     {
+        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+
         public PowerMonitoringWindow()
         {
             RobustXamlLoader.Load(this);
-            Title = Loc.GetString("power-monitoring-window-title");
-            RequestButton.Text = Loc.GetString("power-monitoring-window-button");
+            SetSize = MinSize = (300, 450);
+            IoCManager.InjectDependencies(this);
+            MasterTabContainer.SetTabTitle(0, Loc.GetString("power-monitoring-window-tab-sources"));
+            MasterTabContainer.SetTabTitle(1, Loc.GetString("power-monitoring-window-tab-loads"));
+        }
+
+        public void UpdateState(PowerMonitoringConsoleBoundInterfaceState scc)
+        {
+            UpdateList(TotalSourcesNum, scc.TotalSources, SourcesList, scc.Sources);
+            UpdateList(TotalLoadsNum, scc.TotalLoads, LoadsList, scc.Loads);
+        }
+
+        public void UpdateList(Label number, double numberVal, ItemList list, PowerMonitoringConsoleEntry[] listVal)
+        {
+            number.Text = numberVal.ToString();
+            list.Clear();
+            foreach (var ent in listVal)
+            {
+                _prototypeManager.TryIndex(ent.IconEntityPrototypeId, out EntityPrototype? entityPrototype);
+                IRsiStateLike? iconState = null;
+                if (entityPrototype != null)
+                    iconState = SpriteComponent.GetPrototypeIcon(entityPrototype, StaticIoC.ResC);
+                var icon = iconState?.GetFrame(RSI.State.Direction.South, 0);
+                list.AddItem($"{ent.NameLocalized} {ent.Size} {Loc.GetString("power-monitoring-window-watts")}", icon, false);
+            }
         }
     }
 
