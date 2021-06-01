@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   parent: BaseConstructible
-  id: BaseMachineUnpowered
+  id: BaseMachine
   components:
   - type: InteractionOutline
   - type: Anchorable
@@ -30,8 +30,8 @@
 
 - type: entity
   abstract: true
-  parent: BaseMachineUnpowered
-  id: BaseMachine
+  parent: BaseMachine
+  id: BaseMachinePowered
   components:
   - type: PowerReceiver
 
