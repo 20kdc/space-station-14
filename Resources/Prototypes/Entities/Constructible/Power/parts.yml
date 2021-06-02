@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   id: BaseSmes
-  parent: BaseMachineUnpowered
+  parent: BaseMachine
   name: SMES
   description: A high-capacity superconducting magnetic energy storage (SMES) unit.
   placement:
@@ -41,7 +41,7 @@
 - type: entity
   abstract: true
   id: BaseSubstation
-  parent: BaseMachineUnpowered
+  parent: BaseMachine
   name: substation
   description: Reduces the voltage of electricity put into it.
   placement:
